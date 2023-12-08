@@ -21,50 +21,32 @@ class AppHttpService {
   }
 
   Responser _responserData(http.Response response) {
+    final data = jsonDecode(response.body);
+
     switch (response.statusCode) {
       case 200:
       case 201:
       case 206:
         return Responser(
-          isSuccess: false,
+          isSuccess: true,
           message: 'Fetch Success',
-          data: jsonDecode(response.body),
+          data: data,
         );
 
       case 400:
       case 510:
-        return Responser(
-          isSuccess: false,
-          message: 'Fetch Success',
-          data: jsonDecode(response.body),
-        );
+        return Responser(isSuccess: false, message: 'Fetch Success');
 
       case 401:
-        return Responser(
-          isSuccess: false,
-          message: 'Fetch Success',
-          data: jsonDecode(response.body),
-        );
+        return Responser(isSuccess: false, message: 'Fetch Success');
       case 403:
-        return Responser(
-          isSuccess: false,
-          message: 'Fetch Success',
-          data: jsonDecode(response.body),
-        );
+        return Responser(isSuccess: false, message: 'Fetch Success');
       case 404:
       case 500:
       case 503:
-        return Responser(
-          isSuccess: false,
-          message: 'Fetch Success',
-          data: jsonDecode(response.body),
-        );
+        return Responser(isSuccess: false, message: 'Fetch Success');
       default:
-        return Responser(
-          isSuccess: false,
-          message: 'Fetch Success',
-          data: jsonDecode(response.body),
-        );
+        return Responser(isSuccess: false, message: 'Fetch Success');
     }
   }
 }

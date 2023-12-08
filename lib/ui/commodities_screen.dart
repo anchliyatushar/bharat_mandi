@@ -1,17 +1,18 @@
 import 'package:bharat_mandi/data/data.dart';
 import 'package:bharat_mandi/notifiers/notifiers.dart';
+import 'package:bharat_mandi/ui/ui.dart';
 import 'package:bharat_mandi/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class CommoditiesScreen extends StatefulWidget {
+  const CommoditiesScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CommoditiesScreen> createState() => _CommoditiesScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CommoditiesScreenState extends State<CommoditiesScreen> {
   Commodities? commoditiesData;
 
   @override
@@ -26,6 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Bharat Mandi'),
+        actions: [
+          IconButton(
+            onPressed: _getData,
+            icon: const Icon(
+              Icons.refresh_rounded,
+              size: 24,
+            ),
+          )
+        ],
       ),
       body: Selector<CommoditiesNotifier, bool>(
         selector: (_, model) => model.isLoading,
@@ -50,14 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          return ListView.separated(
-            itemCount: 0,
-            shrinkWrap: true,
-            separatorBuilder: (_, __) => const SizedBox(height: 8),
-            itemBuilder: (_, index) {
-              return const Placeholder();
-            },
-          );
+          return CommoditiesListViewMolecule(commodities: commoditiesData!);
         },
       ),
     );
@@ -73,13 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     notifier.setLoading = false;
 
-    if (!resp.isSuccess) {
-      if (!context.mounted) {
-        return;
-      }
-
-      AppUtils.showSnackbar(context, resp.message.toString());
+    if (!context.mounted) {
       return;
     }
+    AppUtils.showSnackbar(context, resp.message.toString());
   }
 }

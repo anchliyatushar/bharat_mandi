@@ -13,7 +13,11 @@ class CommoditiesRepo {
 
       final data = Commodities.fromJson(resp.data as Map<String, dynamic>);
 
-      return resp.copyWith(data: data) as Responser<Commodities>;
+      return Responser(
+        message: resp.message,
+        isSuccess: resp.isSuccess,
+        data: data,
+      );
     } catch (e) {
       return Responser(isSuccess: false, message: 'Data Parsing Failed');
     }
