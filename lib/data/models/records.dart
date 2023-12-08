@@ -1,3 +1,4 @@
+import 'package:bharat_mandi/utils/utils.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'records.g.dart';
@@ -10,10 +11,14 @@ class Records {
   String? commodity;
   String? variety;
   String? grade;
-  String? arrivalDate;
-  String? minPrice;
-  String? maxPrice;
-  String? modalPrice;
+  @JsonKey(fromJson: parseDateTime, name: 'arrival_date')
+  DateTime? arrivalDate;
+  @JsonKey(fromJson: parseDouble, name: 'min_price')
+  double? minPrice;
+  @JsonKey(fromJson: parseDouble, name: 'max_price')
+  double? maxPrice;
+  @JsonKey(fromJson: parseDouble, name: 'modal_price')
+  double? modalPrice;
 
   Records({
     this.state,

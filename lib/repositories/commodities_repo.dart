@@ -13,6 +13,10 @@ class CommoditiesRepo {
 
       final data = Commodities.fromJson(resp.data as Map<String, dynamic>);
 
+      data.records?.sort(
+        (a, b) => a.district?.compareTo(b.district ?? '') ?? 0,
+      );
+
       return Responser(
         message: resp.message,
         isSuccess: resp.isSuccess,

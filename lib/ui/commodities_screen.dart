@@ -37,31 +37,34 @@ class _CommoditiesScreenState extends State<CommoditiesScreen> {
           )
         ],
       ),
-      body: Selector<CommoditiesNotifier, bool>(
-        selector: (_, model) => model.isLoading,
-        builder: (_, isLoading, __) {
-          if (isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      body: RefreshIndicator(
+        onRefresh: () async => _getData(),
+        child: Selector<CommoditiesNotifier, bool>(
+          selector: (_, model) => model.isLoading,
+          builder: (_, isLoading, __) {
+            if (isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-          if (commoditiesData == null) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('No data'),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: _getData,
-                    child: const Text('Try Again'),
-                  ),
-                ],
-              ),
-            );
-          }
+            if (commoditiesData == null) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('No data'),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: _getData,
+                      child: const Text('Try Again'),
+                    ),
+                  ],
+                ),
+              );
+            }
 
-          return CommoditiesListViewMolecule(commodities: commoditiesData!);
-        },
+            return CommoditiesListViewMolecule(commodities: commoditiesData!);
+          },
+        ),
       ),
     );
   }

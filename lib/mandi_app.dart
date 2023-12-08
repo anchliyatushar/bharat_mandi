@@ -29,7 +29,7 @@ class _MandiAppState extends State<MandiApp> {
       child: MaterialApp(
         title: 'Bharat Mandi',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff5fab34)),
           useMaterial3: true,
         ),
         home: const CommoditiesScreen(),

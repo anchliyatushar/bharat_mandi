@@ -13,10 +13,10 @@ Records _$RecordsFromJson(Map json) => Records(
       commodity: json['commodity'] as String?,
       variety: json['variety'] as String?,
       grade: json['grade'] as String?,
-      arrivalDate: json['arrivalDate'] as String?,
-      minPrice: json['minPrice'] as String?,
-      maxPrice: json['maxPrice'] as String?,
-      modalPrice: json['modalPrice'] as String?,
+      arrivalDate: parseDateTime(json['arrival_date'] as String?),
+      minPrice: parseDouble(json['min_price']),
+      maxPrice: parseDouble(json['max_price']),
+      modalPrice: parseDouble(json['modal_price']),
     );
 
 Map<String, dynamic> _$RecordsToJson(Records instance) => <String, dynamic>{
@@ -26,8 +26,8 @@ Map<String, dynamic> _$RecordsToJson(Records instance) => <String, dynamic>{
       'commodity': instance.commodity,
       'variety': instance.variety,
       'grade': instance.grade,
-      'arrivalDate': instance.arrivalDate,
-      'minPrice': instance.minPrice,
-      'maxPrice': instance.maxPrice,
-      'modalPrice': instance.modalPrice,
+      'arrival_date': instance.arrivalDate?.toIso8601String(),
+      'min_price': instance.minPrice,
+      'max_price': instance.maxPrice,
+      'modal_price': instance.modalPrice,
     };
