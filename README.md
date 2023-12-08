@@ -1,16 +1,17 @@
 # bharat_mandi
 
-A new Flutter project.
+A new Flutter project for showing list of commodity
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Start the emulator on your machine. If you doesn't have one already created, [create one](https://developer.android.com/studio/run/managing-avds).
+2. Go to root of the project and run `flutter pub get`
+3. Click on the green play button at the toolbar of Android Studio.
+4. Let the application boot and get installed into the emulator.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Generate files using build_runner
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+for one time build `dart run build_runner build`
+for one time build with clean`dart run build_runner build --delete-conflicting-outputs`
+to watch changes `dart run build_runner watch`
